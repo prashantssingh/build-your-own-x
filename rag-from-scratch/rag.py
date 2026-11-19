@@ -20,7 +20,11 @@ pipeline = IngestionPipeline(
     vector_store=vector_store,
 )
 
-documents = SimpleWebPageReader(html_to_text=True).load_data(
+
+documents = SimpleWebPageReader(
+    html_to_text=True,
+    metadata_fn=lambda url: {"source": url},
+).load_data(
     ["https://lilianweng.github.io/posts/2023-06-23-agent/"]
 )
 
